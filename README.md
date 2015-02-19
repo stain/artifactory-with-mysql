@@ -2,7 +2,7 @@
 
 Run [Artifactory](http://www.jfrog.com/home/v_artifactory_opensource_overview) inside a Docker container, linking to a mySQL container.
 
-**Docker image:** [soilandreyes/artifactory](https://registry.hub.docker.com/u/soilandreyes/artifactory/)
+**Docker image:** [stain/artifactory](https://registry.hub.docker.com/u/stain/artifactory/)
 
 This dockerfile is based on [mattgruter/artifactory](https://github.com/mattgruter/dockerfile-artifactory) by
 [Matthias Grüter](http://www.matthias.grueter.name/).
@@ -21,14 +21,14 @@ The web server is accessible through port `8080`.
 ## Example
 
 You will need to provide the image with a mySQL 5.5 server or newer. The simplest way to do this is using the
-[mysql-tuned-for-artifactory](https://registry.hub.docker.com/u/soilandreyes/mysql-tuned-for-artifactory/) image:
+[mysql-tuned-for-artifactory](https://registry.hub.docker.com/u/stain/mysql-tuned-for-artifactory/) image:
 
     docker run --name mysql-for-artifactory-data -v /var/lib/mysql busybox
-    docker run -d --volumes-from mysql-for-artifactory-data --name mysql-for-artifactory soilandreyes/mysql-for-artifactory
+    docker run -d --volumes-from mysql-for-artifactory-data --name mysql-for-artifactory stain/mysql-for-artifactory
 
 Wait a few seconds for mySQL to initialize, then run artifactory:
 
-    docker run --name artifactory --link mysql-for-artifactory:mysql -p 8080:8080 soilandreyes/artifactory-with-mysql
+    docker run --name artifactory --link mysql-for-artifactory:mysql -p 8080:8080 stain/artifactory-with-mysql
 
 Now point your browser to http://localhost:8080/ to use Artifactory.
 
@@ -36,7 +36,7 @@ If your Artifactory is being used for deploying artifacts, you probably also wan
 `/artifactory/data` as a separate volume container:
 
     docker run --name artifactory-data -v /artifactory/data busybox
-    docker run --name artifactory --volumes-from artifactory-data --link mysql-for-artifactory:mysql -p 8080:8080 soilandreyes/artifactory-with-mysql
+    docker run --name artifactory --volumes-from artifactory-data --link mysql-for-artifactory:mysql -p 8080:8080 stain/artifactory-with-mysql
 
 ## Runtime options
 Inject the environment variable `RUNTIME_OPTS` when starting a container to set Tomcat's runtime options (i.e. `CATALANA_OPTS`). The most common use case is to set the heap size:
