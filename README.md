@@ -2,7 +2,7 @@
 
 Run [Artifactory](http://www.jfrog.com/home/v_artifactory_opensource_overview) inside a Docker container, linking to a mySQL container.
 
-**Docker image:** [stain/artifactory](https://registry.hub.docker.com/u/stain/artifactory/)
+**Docker image:** [stain/artifactory-with-mysql](https://registry.hub.docker.com/u/stain/artifactory-with-mysql/)
 
 This dockerfile is based on [mattgruter/artifactory](https://github.com/mattgruter/dockerfile-artifactory) by
 [Matthias Grüter](http://www.matthias.grueter.name/).
