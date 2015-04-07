@@ -5,8 +5,8 @@ FROM tomcat:7-jre7
 MAINTAINER Stian Soiland-Reyes <soiland-reyes@cs.manchester.ac.uk>
 
 # To update, check https://bintray.com/jfrog/artifactory/artifactory/view
-ENV ARTIFACTORY_VERSION 3.4.2
-ENV ARTIFACTORY_SHA1 394258c5fc8beffd60de821b6264660f5464b943
+ENV ARTIFACTORY_VERSION 3.5.3
+ENV ARTIFACTORY_SHA1 2d7daaa3272faacbc24cf3f96368a53a3e9286e0
 
 # Disable Tomcat's manager application.
 RUN rm -rf webapps/*
@@ -23,7 +23,7 @@ RUN \
   curl -L -o artifactory.zip https://bintray.com/artifact/download/jfrog/artifactory/artifactory-${ARTIFACTORY_VERSION}.zip && \
   sha1sum -c artifactory.zip.sha1 && \
   unzip -j artifactory.zip "artifactory-*/webapps/artifactory.war" -d webapps && \
-  rm artifactory.zip
+  rm artifactory.zip artifactory.zip.sha1
 
 
 # Expose tomcat runtime options through the RUNTIME_OPTS environment variable.
@@ -39,7 +39,7 @@ ENV ARTIFACTORY_HOME /artifactory
 # Configure to use mysql 
 # https://www.jfrog.com/confluence/display/RTF/MySQL
  
-ADD http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar lib/
+ADD http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar /usr/local/tomcat/lib/
 
 ADD http://subversion.jfrog.org/artifactory/public/trunk/distribution/standalone/src/main/install/misc/db/mysql.properties /artifactory/etc/storage.properties
 # but change localhost to mysql for mySQL container --link
